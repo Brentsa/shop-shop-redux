@@ -6,14 +6,13 @@ const initialState = {
 }
 
 //initialState is the default value of our one reducer function
-export default function shopReducer(state = initialState, action){
+export default function cartReducer(state = initialState, action){
     //switch statement to determine how the reducers is utilized
     switch(action.type){
         //Do something depending on the type of actions
 
         case 'ADD_TO_CART': 
             return {
-                ...state,
                 cartOpen: true,
                 cart: [...state.cart, action.product]
             }
@@ -26,9 +25,29 @@ export default function shopReducer(state = initialState, action){
 
         case 'REMOVE_FROM_CART': 
             return {
-                ...state,
                 cartOpen: (state.cart.length - 1) > 0, 
                 cart: state.cart.filter(product => product._id !== action._id)
+            }
+
+        case 'UPDATE_CART_QUANTITY':
+            return {
+                cartOpen: true,
+                cart: state.cart.map(item => {
+                    if(item._id === action._id) item.purchaseQuantity = action.purchaseQuantity;
+                    return item;
+                })
+            }
+        
+        case 'CLEAR_CART':
+            return {
+                cartOpen: false,
+                cart: []
+            }
+
+        case 'TOGGLE_CART':
+            return {
+                ...state,
+                cartOpen: !state.cartOpen
             }
 
         default: 
