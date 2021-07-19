@@ -1,16 +1,30 @@
 import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
-import { useStoreContext } from '../../utils/GlobalState';
+//import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import ProductItem from '../ProductItem';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { idbPromise } from '../../utils/helpers';
 
+//******************* REDUX CONTENT
+import {useSelector, useDispatch} from 'react-redux';
+const selectProductState = state => state.productState;
+const selectCategoryState = state => state.categoryState;
+//
+
 function ProductList() {
 
-  const [state, dispatch] = useStoreContext();
-  const {currentCategory} = state;
+  //******************* REDUX CONTENT
+  const dispatch = useDispatch();
+  const {products} = useSelector(selectProductState);
+  const {categories, currentCategory} = useSelector(selectCategoryState);
+  console.log("Products have been logged: ", products);
+  console.log("Categories have been logged: ", categories);
+  //
+
+  //const [state, dispatch] = useStoreContext();
+  //const {currentCategory} = state;
   const {loading, data} = useQuery(QUERY_PRODUCTS);
 
   useEffect(() => {
@@ -42,16 +56,18 @@ function ProductList() {
 
   function filterProducts() {
     if (!currentCategory) {
-      return state.products;
+      //return state.products;
+      return products;
     }
 
-    return state.products.filter(product => product.category._id === currentCategory);
+    //return state.products.filter(product => product.category._id === currentCategory);
+    return products.filter(product => product.category._id === currentCategory);
   }
 
   return (
     <div className="my-2">
       <h2>Our Products:</h2>
-      {state.products.length ? (
+      {/*state.products.length*/ products.length ? (
         <div className="flex-row">
           {filterProducts().map((product) => (
             <ProductItem
