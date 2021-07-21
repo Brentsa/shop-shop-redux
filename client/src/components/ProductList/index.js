@@ -18,9 +18,8 @@ function ProductList() {
   //******************* REDUX CONTENT
   const dispatch = useDispatch();
   const {products} = useSelector(selectProductState);
-  const {categories, currentCategory} = useSelector(selectCategoryState);
-  console.log("Products have been logged: ", products);
-  console.log("Categories have been logged: ", categories);
+  const {currentCategory} = useSelector(selectCategoryState);
+  //console.log("Products have been logged: ", products);
   //
 
   //const [state, dispatch] = useStoreContext();

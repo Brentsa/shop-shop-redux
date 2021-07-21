@@ -12,7 +12,7 @@ export default function productsReducer(state = initialState, action){
 
         case 'UPDATE_PRODUCTS':
             return {
-                products: { ...action.products }
+                products: [ ...action.products ]
             };
    
         default: 

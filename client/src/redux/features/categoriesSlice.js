@@ -14,7 +14,7 @@ export default function categoriesReducer(state = initialState, action){
         case 'UPDATE_CATEGORIES':
             return {
                 ...state,
-                categories: { ...action.categories }
+                categories: [ ...action.categories ]
             }
 
         case 'UPDATE_CURRENT_CATEGORY':
