@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { useStoreContext } from '../utils/GlobalState';
+//import { useStoreContext } from '../utils/GlobalState';
 import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY, UPDATE_PRODUCTS } from '../utils/actions';
 import { QUERY_PRODUCTS } from '../utils/queries';
 import spinner from '../assets/spinner.gif';
 import Cart from '../components/Cart';
 import { idbPromise } from '../utils/helpers';
 
+//******************* REDUX CONTENT
+import {useSelector, useDispatch} from 'react-redux';
+const selectProductState = state => state.productState;
+const selectCartState = state => state.cartState;
+
 function Detail() {
-  const [ state, dispatch ] = useStoreContext();
+
+  //******************* REDUX CONTENT
+  const dispatch = useDispatch();
+  const {products} = useSelector(selectProductState);
+  const {cart} = useSelector(selectCartState);
+
+  //const [ state, dispatch ] = useStoreContext();
   const { id } = useParams();
   const [currentProduct, setCurrentProduct] = useState({});
   const { loading, data } = useQuery(QUERY_PRODUCTS);
-  const { products } = state; 
+  //const { products } = state; 
 
   function addToCart(){
-    const cartItem = state.cart.find(item => item._id === id);
+    const cartItem = cart.find(item => item._id === id);
     
     if(cartItem){
       dispatch({
@@ -92,7 +103,7 @@ function Detail() {
           <p>
             <strong>Price:</strong>${currentProduct.price}{' '}
             <button onClick={addToCart}>Add to Cart</button>
-            <button disabled={!state.cart.find(item => item._id === currentProduct._id)} onClick={removeFromCart}>Remove from Cart</button>
+            <button disabled={!cart.find(item => item._id === currentProduct._id)} onClick={removeFromCart}>Remove from Cart</button>
           </p>
 
           <img
