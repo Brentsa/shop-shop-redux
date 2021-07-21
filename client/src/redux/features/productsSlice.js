@@ -20,3 +20,21 @@ export default function productsReducer(state = initialState, action){
             return state;
     }
 }
+
+// import { createSlice } from "@reduxjs/toolkit";
+
+// const productSlice = createSlice({
+//     name: 'product',
+//     initialState,
+//     reducers: {
+//         UPDATE_PRODUCTS(state, action){
+//             return {
+//                 products: [ ...action.products ]
+//             };
+//         }
+//     }
+// });
+
+// export const {createSlice} = productSlice.actions;
+
+// export default productSlice.reducers;

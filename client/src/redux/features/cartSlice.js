@@ -30,12 +30,20 @@ export default function cartReducer(state = initialState, action){
             }
 
         case 'UPDATE_CART_QUANTITY':
+            let newCart = state.cart.map(item => {
+                if(item._id === action._id) {
+                    return{
+                        ...item,
+                        purchaseQuantity: action.purchaseQuantity
+                    }
+                }
+
+                return item;
+            })
+
             return {
                 cartOpen: true,
-                cart: state.cart.map(item => {
-                    if(item._id === action._id) item.purchaseQuantity = action.purchaseQuantity;
-                    return item;
-                })
+                cart: newCart
             }
         
         case 'CLEAR_CART':
