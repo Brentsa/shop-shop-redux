@@ -8,8 +8,8 @@ import * as serviceWorker from './serviceWorker';
 //import the store and the provider component to give the react app access to the redux store
 import store from './redux/store';
 import { Provider } from 'react-redux';
-//
 
+//Wrap the App in the redux Provider and pass the store in as a prop
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

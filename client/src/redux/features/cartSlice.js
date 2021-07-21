@@ -1,5 +1,4 @@
-
-// Initial state to be used by the store
+// Initial state of the cart to be used by the store
 const initialState = {
     cartOpen: false,
     cart: []
@@ -9,8 +8,8 @@ const initialState = {
 export default function cartReducer(state = initialState, action){
     //switch statement to determine how the reducers is utilized
     switch(action.type){
+        
         //Do something depending on the type of actions
-
         case 'ADD_TO_CART': 
             return {
                 cartOpen: true,

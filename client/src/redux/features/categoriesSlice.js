@@ -1,5 +1,4 @@
-
-// Initial state to be used by the store
+// Initial state of the categories to be used by the store
 const initialState = {
     categories: [],
     currentCategory: ''

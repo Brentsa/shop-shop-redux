@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
-//import { useStoreContext } from '../../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import ProductItem from '../ProductItem';
 import { QUERY_PRODUCTS } from '../../utils/queries';
@@ -8,22 +7,18 @@ import spinner from '../../assets/spinner.gif';
 import { idbPromise } from '../../utils/helpers';
 
 //******************* REDUX CONTENT
+//import the selector and dispatch functions from redux and specify the portions of the store we need
 import {useSelector, useDispatch} from 'react-redux';
 const selectProductState = state => state.productState;
 const selectCategoryState = state => state.categoryState;
-//
 
 function ProductList() {
-
   //******************* REDUX CONTENT
+  //define the dispatch and destructure the products and currentCategory properties off of the global store
   const dispatch = useDispatch();
   const {products} = useSelector(selectProductState);
   const {currentCategory} = useSelector(selectCategoryState);
-  //console.log("Products have been logged: ", products);
-  //
-
-  //const [state, dispatch] = useStoreContext();
-  //const {currentCategory} = state;
+  
   const {loading, data} = useQuery(QUERY_PRODUCTS);
 
   useEffect(() => {

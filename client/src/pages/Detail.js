@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-//import { useStoreContext } from '../utils/GlobalState';
 import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY, UPDATE_PRODUCTS } from '../utils/actions';
 import { QUERY_PRODUCTS } from '../utils/queries';
 import spinner from '../assets/spinner.gif';
@@ -9,6 +8,7 @@ import Cart from '../components/Cart';
 import { idbPromise } from '../utils/helpers';
 
 //******************* REDUX CONTENT
+//import the selector and dispatch functions from redux and specify the portions of the store we need
 import {useSelector, useDispatch} from 'react-redux';
 const selectProductState = state => state.productState;
 const selectCartState = state => state.cartState;
@@ -16,15 +16,14 @@ const selectCartState = state => state.cartState;
 function Detail() {
 
   //******************* REDUX CONTENT
+  //define the dispatch and destructure the products and carts properties off of the global store
   const dispatch = useDispatch();
   const {products} = useSelector(selectProductState);
   const {cart} = useSelector(selectCartState);
 
-  //const [ state, dispatch ] = useStoreContext();
   const { id } = useParams();
   const [currentProduct, setCurrentProduct] = useState({});
   const { loading, data } = useQuery(QUERY_PRODUCTS);
-  //const { products } = state; 
 
   function addToCart(){
     const cartItem = cart.find(item => item._id === id);
