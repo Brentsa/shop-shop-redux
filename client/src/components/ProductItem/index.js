@@ -4,7 +4,7 @@ import { pluralize } from "../../utils/helpers";
 import { idbPromise } from "../../utils/helpers";
 
 //******************* REDUX CONTENT
-//import the selector and dispatch functions from redux and specify the portions of the store we need
+//import the selector and dispatch functions from redux
 import {useSelector, useDispatch} from 'react-redux';
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../redux/features/cartSlice';
 

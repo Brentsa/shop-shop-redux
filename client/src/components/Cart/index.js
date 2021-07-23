@@ -8,7 +8,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from "@apollo/client";
 
 //******************* REDUX CONTENT
-//import the selector and dispatch functions from redux and specify the portions of the store we need
+//import the selector and dispatch functions from redux
 import { useSelector, useDispatch } from "react-redux";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../redux/features/cartSlice';
 

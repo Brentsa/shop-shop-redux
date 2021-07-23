@@ -2,6 +2,7 @@ import React from "react";
 import { idbPromise } from "../../utils/helpers";
 
 //******************* REDUX CONTENT
+//import the selector and dispatch functions from redux
 import {useDispatch} from 'react-redux';
 import {REMOVE_FROM_CART, UPDATE_CART_QUANTITY} from '../../redux/features/cartSlice';
 

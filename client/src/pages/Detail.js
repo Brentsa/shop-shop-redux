@@ -7,7 +7,7 @@ import Cart from '../components/Cart';
 import { idbPromise } from '../utils/helpers';
 
 //******************* REDUX CONTENT
-//import the selector and dispatch functions from redux and specify the portions of the store we need
+//import the selector and dispatch functions from redux
 import {useSelector, useDispatch} from 'react-redux';
 import { UPDATE_PRODUCTS } from '../redux/features/productsSlice';
 import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY} from '../redux/features/cartSlice';
