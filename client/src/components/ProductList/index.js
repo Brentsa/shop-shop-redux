@@ -1,23 +1,22 @@
 import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
+//import { UPDATE_PRODUCTS } from '../../utils/actions';
 import ProductItem from '../ProductItem';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { idbPromise } from '../../utils/helpers';
 
 //******************* REDUX CONTENT
-//import the selector and dispatch functions from redux and specify the portions of the store we need
+//import the selector and dispatch functions from redux
 import {useSelector, useDispatch} from 'react-redux';
-const selectProductState = state => state.productState;
-const selectCategoryState = state => state.categoryState;
+import {UPDATE_PRODUCTS} from '../../redux/features/productsSlice';
 
 function ProductList() {
   //******************* REDUX CONTENT
   //define the dispatch and destructure the products and currentCategory properties off of the global store
   const dispatch = useDispatch();
-  const {products} = useSelector(selectProductState);
-  const {currentCategory} = useSelector(selectCategoryState);
+  const {products} = useSelector(state => state.productState);
+  const {currentCategory} = useSelector(state => state.categoryState);
   
   const {loading, data} = useQuery(QUERY_PRODUCTS);
 
@@ -25,10 +24,11 @@ function ProductList() {
     //if there is data to be stored globally
     if(data){
       //store it in the global store
-      dispatch({
-        type: UPDATE_PRODUCTS,
-        products: data.products
-      });
+      // dispatch({
+      //   type: UPDATE_PRODUCTS,
+      //   products: data.products
+      // });
+      dispatch(UPDATE_PRODUCTS({products: data.products}));
 
       //save the products info into indexedDB as well as the global store
       data.products.forEach(product => {
@@ -40,10 +40,11 @@ function ProductList() {
       //since we are offline, get all the product data from idb
       idbPromise('products', 'get').then((products) => {
         //update the global store using the idb data
-        dispatch({
-          type: UPDATE_PRODUCTS,
-          products: products
-        });
+        // dispatch({
+        //   type: UPDATE_PRODUCTS,
+        //   products: products
+        // });
+        dispatch(UPDATE_PRODUCTS({products: data.products}));
       });
     }
   }, [data, loading, dispatch])

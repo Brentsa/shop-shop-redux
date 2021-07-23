@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
 import './style.css';
-import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
+//import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 import { QUERY_CHECKOUT } from "../../utils/queries";
 import { loadStripe } from '@stripe/stripe-js';
@@ -11,7 +11,7 @@ import { useLazyQuery } from "@apollo/client";
 //******************* REDUX CONTENT
 //import the selector and dispatch functions from redux and specify the portions of the store we need
 import { useSelector, useDispatch } from "react-redux";
-const selectCartState = state => state.cartState;
+import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../redux/features/cartSlice';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
@@ -20,7 +20,7 @@ function Cart(){
     //******************* REDUX CONTENT
     //define the dispatch and destructure the cartOpen and carts properties off of the global store
     const dispatch = useDispatch();
-    const {cart, cartOpen} = useSelector(selectCartState);
+    const {cart, cartOpen} = useSelector(state => state.cartState);
 
     //useLazyQuery is used when needed and can be called after the component is mounted
     //data variable will contain the checkout session after the query is called with getCheckout
@@ -31,10 +31,11 @@ function Cart(){
         //return whatever is in the idb cart and store it to the global store
         async function getCart(){
             const cart = await idbPromise('cart', 'get');
-            dispatch({
-                type: ADD_MULTIPLE_TO_CART,
-                products: [...cart]
-            })
+            // dispatch({
+            //     type: ADD_MULTIPLE_TO_CART,
+            //     products: [...cart]
+            // })
+            dispatch(ADD_MULTIPLE_TO_CART({products: [...cart]}));
         }
 
         //if there is nothing in the cart, try getting the cart from idb
@@ -53,7 +54,8 @@ function Cart(){
     }, [data]);
 
     function toggleCart(){
-        dispatch({type: TOGGLE_CART});
+        //dispatch({type: TOGGLE_CART});
+        dispatch(TOGGLE_CART());
     }
 
     function calculateTotal(){
