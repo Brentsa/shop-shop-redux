@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { pluralize } from "../../utils/helpers";
-//import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions'; 
 import { idbPromise } from "../../utils/helpers";
 
 //******************* REDUX CONTENT
@@ -25,11 +24,7 @@ function ProductItem(item) {
 
     //if it is in the cart then increase the qty by 1
     if(cartItem){
-      // dispatch({
-      //   type: UPDATE_CART_QUANTITY,
-      //   _id: _id,
-      //   purchaseQuantity: parseInt(cartItem.purchaseQuantity) + 1
-      // });
+      //Use dispatch to alter redux store state using an imported action as an argument
       dispatch(UPDATE_CART_QUANTITY({_id: _id, purchaseQuantity: parseInt(cartItem.purchaseQuantity) + 1}));
 
       idbPromise('cart', 'put', {
@@ -39,10 +34,7 @@ function ProductItem(item) {
     }
     //if it isnt in the cart then add it to cart with a qty of 1
     else{
-      // dispatch({
-      //   type: ADD_TO_CART,
-      //   product: {...item, purchaseQuantity: 1}
-      // });
+      //Use dispatch to alter redux store state using an imported action as an argument
       dispatch(ADD_TO_CART({product: {...item, purchaseQuantity: 1}}))
 
       idbPromise('cart', 'put', {

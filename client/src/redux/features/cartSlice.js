@@ -1,70 +1,7 @@
-// // Initial state of the cart to be used by the store
-// const initialState = {
-//     cartOpen: false,
-//     cart: []
-// }
-
-// //initialState is the default value of our one reducer function
-// export default function cartReducer(state = initialState, action){
-//     //switch statement to determine how the reducers is utilized
-//     switch(action.type){
-        
-//         //Do something depending on the type of actions
-//         case 'ADD_TO_CART': 
-//             return {
-//                 cartOpen: true,
-//                 cart: [...state.cart, action.product]
-//             }
-
-//         case 'ADD_MULTIPLE_TO_CART':
-//             return {
-//                 ...state,
-//                 cart: [...state.cart, ...action.products]
-//             }
-
-//         case 'REMOVE_FROM_CART': 
-//             return {
-//                 cartOpen: (state.cart.length - 1) > 0, 
-//                 cart: state.cart.filter(product => product._id !== action._id)
-//             }
-
-//         case 'UPDATE_CART_QUANTITY':
-//             let newCart = state.cart.map(item => {
-//                 if(item._id === action._id) {
-//                     return{
-//                         ...item,
-//                         purchaseQuantity: action.purchaseQuantity
-//                     }
-//                 }
-
-//                 return item;
-//             })
-
-//             return {
-//                 cartOpen: true,
-//                 cart: newCart
-//             }
-        
-//         case 'CLEAR_CART':
-//             return {
-//                 cartOpen: false,
-//                 cart: []
-//             }
-
-//         case 'TOGGLE_CART':
-//             return {
-//                 ...state,
-//                 cartOpen: !state.cartOpen
-//             }
-
-//         default: 
-//             //return the state as it is if action is not recognized
-//             return state;
-//     }
-// }
-
+//import all-in-one function createSlice
 import {createSlice} from '@reduxjs/toolkit';
 
+//create a cart slice with an initial state and it's own reducer functions
 export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
@@ -122,6 +59,8 @@ export const cartSlice = createSlice({
     }
 });
 
+//export the reducer action functions for use in react components
 export const {ADD_TO_CART, ADD_MULTIPLE_TO_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY, CLEAR_CART, TOGGLE_CART} = cartSlice.actions;
 
+//export the reducer portion for the store
 export default cartSlice.reducer;

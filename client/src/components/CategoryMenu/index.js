@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_CATEGORIES } from '../../utils/queries';
-//import {UPDATE_CURRENT_CATEGORY, UPDATE_CATEGORIES} from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 
 //******************* REDUX CONTENT
@@ -22,11 +21,7 @@ function CategoryMenu() {
   useEffect(() => {
     //if there is category data that has been returned by useQuery then run dispatch
     if(categoryData){
-      //execute the dispatch function to use the update categories action and provide the new category data to the state
-      // dispatch({
-      //   type: UPDATE_CATEGORIES,
-      //   categories: categoryData.categories
-      // });
+      //Use dispatch to alter redux store state using an imported action as an argument
       dispatch(UPDATE_CATEGORIES({categories: categoryData.categories}));
 
       //place each category into idb
@@ -37,20 +32,14 @@ function CategoryMenu() {
     else if(!loading){
       //load all the categories from idb and once complete, update the global state
       idbPromise('categories', 'get').then(categories => {
-        // dispatch({
-        //   type: UPDATE_CATEGORIES,
-        //   categories: categories
-        // })
+        //Use dispatch to alter redux store state using an imported action as an argument
         dispatch(UPDATE_CATEGORIES({categories: categories}));
       })
     }
   }, [categoryData, loading, dispatch]);
 
   const clickHandler = id => {
-    // dispatch({
-    //   type: UPDATE_CURRENT_CATEGORY,
-    //   currentCategory: id
-    // })
+    //Use dispatch to alter redux store state using an imported action as an argument
     dispatch(UPDATE_CURRENT_CATEGORY({currentCategory: id}));
   }
 

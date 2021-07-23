@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-// import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_QUANTITY} from '../utils/actions';
 import { QUERY_PRODUCTS } from '../utils/queries';
 import spinner from '../assets/spinner.gif';
 import Cart from '../components/Cart';
@@ -29,11 +28,7 @@ function Detail() {
     const cartItem = cart.find(item => item._id === id);
     
     if(cartItem){
-      // dispatch({
-      //   type: UPDATE_CART_QUANTITY,
-      //   _id: id,
-      //   purchaseQuantity: parseInt(cartItem.purchaseQuantity) + 1
-      // });
+      //Use dispatch to alter redux store state using an imported action as an argument
       dispatch(UPDATE_CART_QUANTITY({_id: id, purchaseQuantity: parseInt(cartItem.purchaseQuantity) + 1}));
       
       //if we are updating an item already in the cart, then update the cart item with the new quantity
@@ -43,10 +38,7 @@ function Detail() {
       });
     }
     else{
-      // dispatch({
-      //   type: ADD_TO_CART,
-      //   product: {...currentProduct, purchaseQuantity: 1}
-      // });
+      //Use dispatch to alter redux store state using an imported action as an argument
       dispatch(ADD_TO_CART({product: {...currentProduct, purchaseQuantity: 1}}));
 
       //if the item isnt in the cart then we update the idb cart with a qty of 1
@@ -58,10 +50,7 @@ function Detail() {
   }
 
   function removeFromCart(){
-    // dispatch({
-    //   type: REMOVE_FROM_CART,
-    //   _id: currentProduct._id
-    // })
+    //Use dispatch to alter redux store state using an imported action as an argument
     dispatch(REMOVE_FROM_CART({_id: currentProduct._id}));
 
     //delete the item from idb cart object store
@@ -73,10 +62,7 @@ function Detail() {
       setCurrentProduct(products.find((product) => product._id === id));
     }
     else if (data){
-      // dispatch({
-      //   type: UPDATE_PRODUCTS,
-      //   products: data.products
-      // });
+      //Use dispatch to alter redux store state using an imported action as an argument
       dispatch(UPDATE_PRODUCTS({products: data.products}));
 
       data.products.forEach(product => {
@@ -85,10 +71,7 @@ function Detail() {
     }
     else if (!loading){
       idbPromise('products', 'get').then(products => {
-        // dispatch({
-        //   type: UPDATE_PRODUCTS,
-        //   products: products
-        // });
+        //Use dispatch to alter redux store state using an imported action as an argument
         dispatch(UPDATE_PRODUCTS({products: products}));
       });
     }

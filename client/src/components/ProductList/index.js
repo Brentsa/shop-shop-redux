@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import { useQuery } from '@apollo/client';
-//import { UPDATE_PRODUCTS } from '../../utils/actions';
 import ProductItem from '../ProductItem';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
@@ -23,11 +22,7 @@ function ProductList() {
   useEffect(() => {
     //if there is data to be stored globally
     if(data){
-      //store it in the global store
-      // dispatch({
-      //   type: UPDATE_PRODUCTS,
-      //   products: data.products
-      // });
+      //Use dispatch to alter redux store state using an imported action as an argument
       dispatch(UPDATE_PRODUCTS({products: data.products}));
 
       //save the products info into indexedDB as well as the global store
@@ -39,11 +34,7 @@ function ProductList() {
     else if(!loading){
       //since we are offline, get all the product data from idb
       idbPromise('products', 'get').then((products) => {
-        //update the global store using the idb data
-        // dispatch({
-        //   type: UPDATE_PRODUCTS,
-        //   products: products
-        // });
+        //Use dispatch to alter redux store state using an imported action as an argument
         dispatch(UPDATE_PRODUCTS({products: data.products}));
       });
     }

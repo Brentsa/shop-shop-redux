@@ -1,35 +1,7 @@
-// // Initial state of the categories to be used by the store
-// const initialState = {
-//     categories: [],
-//     currentCategory: ''
-// }
-
-//initialState is the default value of our one reducer function
-// export default function categoriesReducer(state = initialState, action){
-//     //switch statement to determine how the reducers is utilized
-//     switch(action.type){
-//         //Do something depending on the type of actions
-        
-//         case 'UPDATE_CATEGORIES':
-//             return {
-//                 ...state,
-//                 categories: [ ...action.categories ]
-//             }
-
-//         case 'UPDATE_CURRENT_CATEGORY':
-//             return {
-//                 ...state,
-//                 currentCategory: action.currentCategory
-//             }
-
-//         default: 
-//             //return the state as it is if action is not recognized
-//             return state;
-//     }
-// }
-
+//import all-in-one function createSlice
 import { createSlice } from "@reduxjs/toolkit";
 
+//create a category slice with an initial state and it's own reducer functions
 export const categorySlice = createSlice({
     name: 'category',
     initialState: {
@@ -52,6 +24,8 @@ export const categorySlice = createSlice({
     }
 });
 
+//export the reducer action functions for use in react components
 export const { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY} = categorySlice.actions;
 
+//export the reducer portion for the store
 export default categorySlice.reducer;
