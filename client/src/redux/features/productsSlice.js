@@ -8,7 +8,7 @@ export const productSlice = createSlice({
         products: []
     },
     reducers: {
-        UPDATE_PRODUCTS(state, action){
+        UPDATE_PRODUCTS(action){
             return {
                 products: [ ...action.payload.products ]
             };
