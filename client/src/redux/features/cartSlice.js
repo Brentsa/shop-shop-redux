@@ -1,5 +1,5 @@
 //import all-in-one function createSlice
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 //create a cart slice with an initial state and it's own reducer functions
 export const cartSlice = createSlice({
