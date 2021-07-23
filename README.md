@@ -14,7 +14,7 @@ Shop-Shop is an e-commerce platform that utilizes the MERN stack and Redux to pr
 * [Credits](#Credits)
 
 ## Installation
-Visit Shop-Shop by clicking [here]()!
+Visit Shop-Shop by clicking [here](https://shop-shop-version-redux.herokuapp.com/)!
 
 ## Usage
 Navigate to the home page and begin using Shop-Shop like any other e-commerce website! View products for sale, add them to your cart, and checkout your order!
